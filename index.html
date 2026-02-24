@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>考试加油我滴男大 ❤️</title>
+
+<style>
+body{
+    margin:0;
+    background:linear-gradient(135deg,#0b0b2b,#1a1a3a);
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:"Microsoft YaHei";
+    color:white;
+    position:relative;
+}
+
+/* ⭐ 星星动画 */
+.star{
+    position:absolute;
+    background:white;
+    border-radius:50%;
+    box-shadow:0 0 10px white;
+    animation:twinkle 2s infinite ease-in-out;
+    z-index:1;
+}
+
+@keyframes twinkle{
+    0%,100%{opacity:0.2;transform:scale(0.7);}
+    50%{opacity:1;transform:scale(1.3);}
+}
+
+/* 流星 */
+.shooting-star{
+    position:absolute;
+    width:4px;
+    height:4px;
+    background:white;
+    border-radius:50%;
+    box-shadow:0 0 20px white;
+    animation:shoot 6s linear infinite;
+    opacity:0;
+    z-index:1;
+}
+
+@keyframes shoot{
+    0%{transform:translateX(0) translateY(0);opacity:1;}
+    70%{opacity:1;}
+    100%{transform:translateX(300px) translateY(300px);opacity:0;}
+}
+
+/* 特效星星（答对时爆炸） */
+.special-star{
+    position:absolute;
+    background:gold;
+    border-radius:50%;
+    box-shadow:0 0 30px gold;
+    z-index:100;
+    pointer-events:none;
+    animation:explode 1.5s forwards;
+}
+
+@keyframes explode{
+    0%{transform:scale(0);opacity:1;}
+    50%{transform:scale(2);opacity:0.8;}
+    100%{transform:scale(3);opacity:0;}
+}
+
+.card{
+    background:rgba(255,255,255,0.95);
+    color:#333;
+    padding:30px;
+    border-radius:30px;
+    text-align:center;
+    max-width:500px;
+    box-shadow:0 20px 40px rgba(0,0,0,0.4);
+    z-index:10;
+    margin:20px;
+    backdrop-filter:blur(5px);
+    border:3px solid #ffb6c1;
+}
+
+.heart{
+    font-size:60px;
+    animation:heartbeat 1.2s infinite;
+    display:inline-block;
+}
+
+@keyframes heartbeat{
+    0%{transform:scale(1);}
+    25%{transform:scale(1.15);}
+    50%{transform:scale(1);}
+    75%{transform:scale(1.08);}
+}
+
+/* Spotify 提示区 */
+.spotify-box{
+    background:#fff0f3;
+    padding:20px;
+    border-radius:20px;
+    margin:20px 0;
+    border:2px solid #ffb6c1;
+}
+
+.apology-text{
+    color:#ff4d6d;
+    font-size:16px;
+    line-height:1.8;
+    margin-bottom:15px;
+    font-weight:bold;
+}
+
+/* Spotify 按钮 - Spotify绿 */
+.spotify-btn{
+    background:#1DB954;
+    color:white;
+    border:none;
+    padding:15px 30px;
+    border-radius:50px;
+    cursor:pointer;
+    font-size:18px;
+    font-weight:bold;
+    width:100%;
+    box-shadow:0 5px 15px rgba(29,185,84,0.4);
+    transition:0.3s;
+    margin:5px 0;
+}
+
+.spotify-btn:hover{
+    background:#1aa34a;
+    transform:scale(1.05);
+}
+
+/* 使用说明 */
+.instruction{
+    font-size:14px;
+    color:#666;
+    margin-top:10px;
+    background:#f5f5f5;
+    padding:8px;
+    border-radius:20px;
+}
+
+.question-box{
+    background:#f0f4ff;
+    padding:20px;
+    border-radius:20px;
+    margin:20px 0;
+}
+
+.question{
+    font-size:20px;
+    font-weight:bold;
+    color:#4a4a4a;
+    margin:5px 0;
+}
+
+.answer-input{
+    margin:15px 0;
+    padding:10px;
+    width:80%;
+    border:2px solid #b1c3ff;
+    border-radius:30px;
+    font-size:16px;
+    text-align:center;
+}
+
+.submit-btn{
+    background:#667eea;
+    color:white;
+    border:none;
+    padding:10px 25px;
+    border-radius:30px;
+    cursor:pointer;
+    font-size:16px;
+    font-weight:bold;
+    margin:5px;
+}
+
+.submit-btn:hover{
+    background:#764ba2;
+}
+
+/* 答对后的恭喜区域（先出现） */
+.congrats-section{
+    display:none;
+    margin-top:20px;
+    padding:25px;
+    background:rgba(255,215,0,0.15);
+    border-radius:20px;
+    border:2px solid gold;
+    animation:congratsAppear 1s;
+}
+
+@keyframes congratsAppear{
+    from{opacity:0;transform:scale(0.9);}
+    to{opacity:1;transform:scale(1);}
+}
+
+.congrats-text{
+    font-size:22px;
+    font-weight:bold;
+    color:#b8860b;
+    margin-bottom:15px;
+}
+
+.continue-btn{
+    background:gold;
+    color:#4a4a4a;
+    border:none;
+    padding:12px 30px;
+    border-radius:50px;
+    cursor:pointer;
+    font-size:18px;
+    font-weight:bold;
+    box-shadow:0 5px 15px rgba(255,215,0,0.4);
+    transition:0.3s;
+}
+
+.continue-btn:hover{
+    background:#ffd700;
+    transform:scale(1.05);
+}
+
+/* 祝福区域（点击继续后才出现） */
+.blessing-section{
+    display:none;
+    margin-top:20px;
+    padding:20px;
+    background:rgba(255,240,245,0.9);
+    border-radius:20px;
+    animation:giftAppear 1s;
+}
+
+@keyframes giftAppear{
+    from{opacity:0;transform:scale(0.9);}
+    to{opacity:1;transform:scale(1);}
+}
+
+.message-box{
+    background:white;
+    padding:20px;
+    border-radius:20px;
+    margin:15px 0;
+    color:#4a4a4a;
+    font-size:18px;
+    line-height:1.8;
+    text-align:left;
+    border:2px solid #ffb6c1;
+}
+
+.message-box p{
+    margin:8px 0;
+}
+
+.highlight{
+    color:#ff4d6d;
+    font-weight:bold;
+    font-size:20px;
+}
+
+.signature{
+    margin-top:20px;
+    color:#999;
+    border-top:2px dashed #b1c3ff;
+    padding-top:15px;
+}
+</style>
+</head>
+<body>
+
+<!-- 星星容器 -->
+<div id="stars"></div>
+
+<div class="card">
+    <div class="heart">❤️</div>
+
+    <!-- 🎵 Spotify 专区 + 道歉语 -->
+    <div class="spotify-box">
+        <div class="apology-text">
+            😢 不好意思 本来想弄直接能听到音乐的，<br>
+            但是一直弄不到 &#8230;<br>
+            <span style="font-size:18px; color:#ff4d6d;">👇 点击以下一边听 Spotify 更有 feel 👇</span>
+        </div>
+        <button class="spotify-btn" onclick="window.open('https://open.spotify.com/track/4IJ9vIVOjXBxUhRfY2ypph?si=xvc3-znSQ6mg99qSFCOGHA', '_blank')">
+            ▶️ 在 Spotify 播放《最好的事》
+        </button>
+        <div class="instruction">
+            💡 点开后 Spotify 会开始播放，<br>
+            然后**返回这个页面**，就能一边听歌一边看啦！
+        </div>
+    </div>
+
+    <!-- 问题区 -->
+    <div class="question-box">
+        <div class="question">✨ 想继续看请先回答以下问题 ✨</div>
+        <div class="question">请问抬头看什么许愿最灵？</div>
+        <input type="text" id="answer" class="answer-input" placeholder="输入答案...">
+        <button class="submit-btn" onclick="checkAnswer()">✨ 提交答案 ✨</button>
+    </div>
+
+    <!-- 答对后的恭喜区域（先出现） -->
+    <div id="congratsSection" class="congrats-section">
+        <div class="congrats-text">
+            ⭐ omg人怎么可以聪明成这样 ！恭喜男大回答正确～<br>
+            太聪明了叭！ ⭐
+        </div>
+        <button class="continue-btn" onclick="showBlessing()">✨ 点击继续 ✨</button>
+    </div>
+
+    <!-- 祝福区域（点击继续后才出现） -->
+    <div id="blessingSection" class="blessing-section">
+        <div class="message-box">
+            <p>💜 祝我滴男大 考试顺利 考的全会 超常发挥  💜</p>
+            <p>在我眼里你一直都超级厉害的，</p>
+            <p>也一直很努力。</p>
+            <p>我想说的是：</p>
+            <p>我一直都在喔！</p>
+            <p>也会一直都支持你，</p>
+            <p>为你加油滴 加油加油加油✨</p>
+        </div>
+    </div>
+    
+    <div class="signature">
+        来自：爱你的女盆友 💕
+    </div>
+</div>
+
+<script>
+// ⭐ 生成普通星星和流星
+function createStars() {
+    // 普通星星
+    for(let i=0;i<200;i++){
+        let star=document.createElement("div");
+        star.className="star";
+        star.style.width=Math.random()*3+1+"px";
+        star.style.height=star.style.width;
+        star.style.left=Math.random()*window.innerWidth+"px";
+        star.style.top=Math.random()*window.innerHeight+"px";
+        star.style.animationDelay=Math.random()*2+"s";
+        document.body.appendChild(star);
+    }
+    
+    // 流星
+    for(let i=0;i<5;i++){
+        let meteor=document.createElement("div");
+        meteor.className="shooting-star";
+        meteor.style.left=Math.random()*window.innerWidth+"px";
+        meteor.style.top=Math.random()*window.innerHeight*0.3+"px";
+        meteor.style.animationDelay=Math.random()*8+"s";
+        document.body.appendChild(meteor);
+    }
+}
+createStars();
+
+// ✨ 星星爆炸特效
+function starExplosion() {
+    for(let i=0;i<30;i++){
+        setTimeout(() => {
+            let star=document.createElement("div");
+            star.className="special-star";
+            star.style.left=Math.random()*window.innerWidth+"px";
+            star.style.top=Math.random()*window.innerHeight+"px";
+            star.style.width=Math.random()*20+10+"px";
+            star.style.height=star.style.width;
+            document.body.appendChild(star);
+            
+            setTimeout(() => star.remove(), 1500);
+        }, i*50);
+    }
+}
+
+// 检查答案
+function checkAnswer(){
+    let userAnswer = document.getElementById("answer").value.trim().toLowerCase();
+    
+    if(userAnswer.includes("星星") || userAnswer.includes("star") || userAnswer.includes("⭐") || userAnswer.includes("xing")){
+        
+        // 显示恭喜区域
+        document.getElementById("congratsSection").style.display = "block";
+        
+        // 星星爆炸特效
+        starExplosion();
+        
+        // 滚动到恭喜区域
+        document.getElementById("congratsSection").scrollIntoView({behavior:"smooth"});
+        
+    } else {
+        alert("再想想～ ✨ 抬头看什么许愿最灵？");
+    }
+}
+
+// 显示祝福区域
+function showBlessing(){
+    document.getElementById("blessingSection").style.display = "block";
+    document.getElementById("blessingSection").scrollIntoView({behavior:"smooth"});
+}
+</script>
+
+</body>
+</html>
